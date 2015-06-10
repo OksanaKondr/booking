@@ -41,7 +41,7 @@ public class Roma_Test {
 		bookingPage.submitbuttonSearch();
 		bookingPage.trainsTable();
 		
-		Assert.assertEquals(bookingPage.tTable, driver.findElement(By.xpath("//*[@id='ts_res_tbl']")));
+		Assert.assertEquals(true, driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled());
 		
 							
 	}
