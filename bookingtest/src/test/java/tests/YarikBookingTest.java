@@ -26,12 +26,12 @@ public class YarikBookingTest extends DriverSetup {
 	driver = setUp();
 	}
 
-    @Test
-    @Features("Demo")
-    @Stories("Demo test")
-    public void testDemo() throws Exception {
-
-    }
+//    @Test
+//    @Features("Demo")
+//    @Stories("Demo test")
+//    public void testDemo() throws Exception {
+//
+//    }
 
    
     @AfterClass
@@ -40,3 +40,4 @@ public class YarikBookingTest extends DriverSetup {
     }
 
 }
+
