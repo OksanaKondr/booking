@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 
 
 public class RomaBookingPage {
@@ -29,13 +31,15 @@ public class RomaBookingPage {
 	@FindBy (xpath="//*[@id='ts_res_tbl']")
 	public WebElement tTable;
 	
-	 public RomaBookingPage(WebDriver driver) 
+	 
+	public RomaBookingPage(WebDriver driver) 
 	 {
 			this.driver = driver;
 			PageFactory.initElements(driver, this);
 	 }
 
-	public void enterStationFrom(String value) throws InterruptedException
+	@Step
+	 public void enterStationFrom(String value) throws InterruptedException
 	{	
 		station_from.sendKeys(value);
 		WebDriverWait wait = new WebDriverWait(driver, 4);
@@ -43,7 +47,7 @@ public class RomaBookingPage {
 		driver.findElement(By.xpath(".//*[@id='stations_from']/div[1]")).click();;
 		
 	}
-	
+	@Step
 	public void enterStationTill(String value) throws InterruptedException
 	{
 		station_till.sendKeys(value);
@@ -52,6 +56,7 @@ public class RomaBookingPage {
 		driver.findElement(By.xpath(".//*[@id='stations_till']/div[1]")).click();;
 	}
 	
+	@Step
 	public void trainsTable()
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 4);
@@ -60,17 +65,20 @@ public class RomaBookingPage {
 		
 	}
 	
+	@Step
 	public void enterDate(String value)
 	{
 		date_dep.clear();
 		date_dep.sendKeys(value);
 	}
 	
+	@Step
 	public void submitbuttonSearch()
 	{
 	     search.click();
 	}
 	
+	@Step
 	public void cleanUpAll()
 	{
 		station_from.clear();

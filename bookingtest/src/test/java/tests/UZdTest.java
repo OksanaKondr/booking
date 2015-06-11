@@ -11,6 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import utils.DriverSetup;
@@ -24,7 +26,7 @@ public class UZdTest extends DriverSetup {
 	public void init() throws IOException {
 		driver = setUp();
 
-		orderForm = PageFactory.initElements(driver, OrderForm.class);
+		orderForm = new OrderForm(driver);
 	}
 
 	@Test
