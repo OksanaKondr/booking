@@ -61,7 +61,7 @@ public class OrderForm {
 						.xpath("html/body/div[2]/div/table/tbody/tr/td[1]/table/tbody/tr[2]/td[5]")));
 		driver.findElements(
 				By.cssSelector(".rui-calendar .month td:not(.disabled):not(.blank)"))
-				.get(0).click();
+				.get(1).click();
 
 	}
 

@@ -32,7 +32,7 @@ public class Roma_Test extends DriverSetup{
 		driver.get("http://booking.uz.gov.ua/en/");
 		driver.manage().window().maximize();*/
 	    
-	        driver = setUp();
+	    driver = setUp();
 		bookingPage=PageFactory.initElements(driver,RomaBookingPage.class);
 
 	}
@@ -61,7 +61,7 @@ public class Roma_Test extends DriverSetup{
 		bookingPage.submitbuttonSearch();
 		bookingPage.trainsTable();
 	
-		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='num']/a")).getText(), "763 Ë");
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='num']/a")).getText(), "763 ï¿½");
 		
 	}	
 	

@@ -40,7 +40,7 @@ public class UZdTest extends DriverSetup {
 		
 		int count = orderForm.getCount();
 		
-		Assert.assertTrue(count>0, "message");
+		Assert.assertTrue(count>0, "Thgdfpog sjerpog  drhj dj fhdx");
 		
 
 	}
