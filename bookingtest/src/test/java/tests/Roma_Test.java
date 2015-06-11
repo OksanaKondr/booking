@@ -33,7 +33,7 @@ public class Roma_Test extends DriverSetup{
 		driver.manage().window().maximize();*/
 	    
 	    driver = setUp();
-		bookingPage=PageFactory.initElements(driver,RomaBookingPage.class);
+		bookingPage= new RomaBookingPage(driver);
 
 	}
 
@@ -46,7 +46,7 @@ public class Roma_Test extends DriverSetup{
 		bookingPage.submitbuttonSearch();
 		bookingPage.trainsTable();
 		
-		Assert.assertEquals(true, driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled());
+		Assert.assertEquals(true, bookingPage.isTableEnabled());
 		
 							
 	}

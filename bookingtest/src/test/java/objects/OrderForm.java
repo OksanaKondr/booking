@@ -15,6 +15,7 @@ public class OrderForm {
 	private  WebDriver driver;
 
 	public OrderForm(WebDriver driver) {
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

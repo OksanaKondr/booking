@@ -27,8 +27,8 @@ public class OksanaBookingTest extends DriverSetup {
     public void init() throws IOException {
 	driver = setUp();
 	
-	driver.manage().window().maximize();
-	page = PageFactory.initElements(driver, TrainsSearchPage.class);
+
+	page = new TrainsSearchPage(driver);
 	}
 
     @Test
@@ -36,30 +36,23 @@ public class OksanaBookingTest extends DriverSetup {
     @Stories("Demo test")
     public void testDemo() throws Exception {
     	page.stationFrom("Ky");
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.setStationFrom();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.stationTill("Od");
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.setStationTill();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.date();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.setDate();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.time();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	page.setTime();
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     	page.trainsSearch();
-    	driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS); 
+
     	driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled();
     	//Assert.assertEquals(true, driver.findElement(By.xpath(".//*[@id='ts_res_tbl']/tbody/*/td[@class='num']/a[text()='148 К']")).isEnabled());
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    	
     	Assert.assertEquals(true, driver.findElement(By.xpath(".//*[@id='ts_res_tbl']/tbody/*/td[@class='num']/a")).isEnabled());
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    	
     	//Assert.assertTrue(page.trainsEnsure("148 К"));
-    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    
     	//Assert.assertTrue(page.trainsEnsure("105 К"));
     }
 

@@ -1,5 +1,6 @@
 package objects;
 
+import objects.components.DatePicker;
 import objects.components.StationEnter;
 
 import org.openqa.selenium.WebDriver;
@@ -12,14 +13,16 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 public class YarikBookingPage {
 
     private StationEnter station_from;
+    
     @FindBy(id = "station_till")
     private StationEnter station_to;
     
     @FindBy(name = "search")
     private Button searchButton;
     
+    private DatePicker date;
     
-    
+     
     public YarikBookingPage(WebDriver driver) {
         PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }

@@ -34,8 +34,9 @@ public class RomaBookingPage {
 	 
 	public RomaBookingPage(WebDriver driver) 
 	 {
-			this.driver = driver;
-			PageFactory.initElements(driver, this);
+		this.driver = driver;
+		
+		PageFactory.initElements(this.driver, this);
 	 }
 
 	@Step
@@ -85,6 +86,12 @@ public class RomaBookingPage {
 		station_till.clear();
 		date_dep.clear();
 		
+	}
+
+	@Step
+	public boolean isTableEnabled() {
+		// TODO Auto-generated method stub
+		return driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled();
 	}
 	
 }
