@@ -1,22 +1,43 @@
-/**
- * 
- */
 package tests;
 
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import utils.DriverSetup;
+
+
 
 /**
  * @author y.pernerovskyy
  *
  */
-public class YarikBookingTest {
+public class YarikBookingTest extends DriverSetup {
 
+    WebDriver driver;
+   
+    @BeforeClass
+    public void init() throws IOException {
+	driver = setUp();
+	}
 
-    @Test
-    public void simpleTest() {
-	System.out.println("I'm in");
-    }
+//    @Test
+//    @Features("Demo")
+//    @Stories("Demo test")
+//    public void testDemo() throws Exception {
+//
+//    }
 
    
+    @AfterClass
+    public void shutDown() {
+	driver.quit();
+    }
 
 }
+
