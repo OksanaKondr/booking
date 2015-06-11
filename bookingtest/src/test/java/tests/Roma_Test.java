@@ -61,7 +61,7 @@ public class Roma_Test extends DriverSetup{
 		bookingPage.submitbuttonSearch();
 		bookingPage.trainsTable();
 	
-		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='num']/a")).getText(), "763 �");
+		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='num']/a")).getText(), "763 К");
 		
 	}	
 	
