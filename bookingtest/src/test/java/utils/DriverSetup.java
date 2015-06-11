@@ -64,8 +64,8 @@ public class DriverSetup extends TestListenerAdapter {
 	}
 
 	driver.manage().window().maximize();
-	driver.manage().timeouts().setScriptTimeout(1, TimeUnit.MINUTES);
-	driver.manage().timeouts().pageLoadTimeout(2, TimeUnit.MINUTES);
+	driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+	driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 	driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 	driver.get(url);
