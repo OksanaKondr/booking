@@ -7,7 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import ru.yandex.qatools.allure.annotations.Step;
 
 public class TrainsSearchPage {
 
@@ -20,24 +23,12 @@ public class TrainsSearchPage {
 
 	}
 
-	@FindBy(xpath = ".//*[@id='station_from']/input")
+	@FindBy(xpath = "//input[@name='station_from']")
 	private WebElement from;
 
-	@FindBy(xpath = ".//*[@id='station_till']/input")
+	@FindBy(xpath = "//input[@name='station_till']")
 	private WebElement till;
-
-	@FindBy(xpath = ".//*[@id='stations_from']")
-	private WebElement stationFrom;
-
-	@FindBy(xpath = ".//*[@id='stations_till']")
-	private WebElement stationTill;
-
-	@FindBy(xpath = "//div[@title='Kyiv']")
-	private WebElement kiev;
-
-	@FindBy(xpath = "//div[@title='Odesa']")
-	private WebElement odesa;
-
+	
 	@FindBy(xpath = ".//*[@id='date_dep']")
 	private WebElement date;
 
@@ -59,23 +50,23 @@ public class TrainsSearchPage {
 	@FindBy(xpath = "//*[@id='ts_res_tbl']")
 	private WebElement trainTable;
 
-	@FindBy(xpath = ".//*[@id='ts_res_tbl']/tbody/*/td[@class='num']/a")
+	@FindBy(xpath = ".//*[@class='num']")  
 	private WebElement train;
 
+	@Step
 	public void stationFrom(String value) {
 		from.sendKeys(value);
+		WebDriverWait wait = new WebDriverWait(driver, 4);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Kyiv']")));
+		driver.findElement(By.xpath("//div[@title='Kyiv']")).click();
 	}
 
+	@Step
 	public void stationTill(String value) {
 		till.sendKeys(value);
-	}
-
-	public void setStationFrom() {
-		kiev.click();
-	}
-
-	public void setStationTill() {
-		odesa.click();
+		WebDriverWait wait = new WebDriverWait(driver, 4);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Odesa']")));
+		driver.findElement(By.xpath("//div[@title='Odesa']")).click();
 	}
 
 	public void date() {
@@ -99,11 +90,8 @@ public class TrainsSearchPage {
 	}
 
 	public boolean trainsEnsure(String text) {
-		boolean b = false;
 
-		if (driver.findElement(By.id("train")).getText().equals(text))
-			b = true;
-		return b;
+		return train.getText().contains(text);
 	}
 
 }

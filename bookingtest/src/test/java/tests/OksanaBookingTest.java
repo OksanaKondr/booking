@@ -1,5 +1,7 @@
 package tests;
 
+import objects.TrainsSearchPage;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +9,8 @@ import objects.TrainsSearchPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -25,20 +29,22 @@ public class OksanaBookingTest extends DriverSetup {
    
     @BeforeClass
     public void init() throws IOException {
-	driver = setUp();
-	
 
+	driver = setUp();
 	page = new TrainsSearchPage(driver);
+	page = PageFactory.initElements(driver, TrainsSearchPage.class);
+	
 	}
 
     @Test
     @Features("Demo")
     @Stories("Demo test")
     public void testDemo() throws Exception {
-    	page.stationFrom("Ky");
-    	page.setStationFrom();
-    	page.stationTill("Od");
-    	page.setStationTill();
+    	
+    	WebElement train;
+    	
+    	page.stationFrom("Kyiv");
+    	page.stationTill("Odesa");
     	page.date();
     	page.setDate();
     	page.time();
@@ -46,12 +52,9 @@ public class OksanaBookingTest extends DriverSetup {
 
     	page.trainsSearch();
 
-    	driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled();
-    	//Assert.assertEquals(true, driver.findElement(By.xpath(".//*[@id='ts_res_tbl']/tbody/*/td[@class='num']/a[text()='148 К']")).isEnabled());
-    	
-    	Assert.assertEquals(true, driver.findElement(By.xpath(".//*[@id='ts_res_tbl']/tbody/*/td[@class='num']/a")).isEnabled());
-    	
-    	//Assert.assertTrue(page.trainsEnsure("148 К"));
+    	//Assert.assertEquals(true, driver.findElement(By.xpath("//*[@id='ts_res_tbl']")).isEnabled());
+  
+    	Assert.assertTrue(page.trainsEnsure("148 К"));
     
     	//Assert.assertTrue(page.trainsEnsure("105 К"));
     }
