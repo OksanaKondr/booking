@@ -1,7 +1,5 @@
 package objects;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,10 +15,8 @@ public class TrainsSearchPage {
 	WebDriver driver;
 
 	public TrainsSearchPage(WebDriver driver) {
-
 		this.driver = driver;
-		PageFactory.initElements(driver, this);
-
+		PageFactory.initElements(this.driver, this);
 	}
 
 	@FindBy(xpath = "//input[@name='station_from']")
@@ -28,70 +24,77 @@ public class TrainsSearchPage {
 
 	@FindBy(xpath = "//input[@name='station_till']")
 	private WebElement till;
-	
-	@FindBy(xpath = ".//*[@id='date_dep']")
-	private WebElement date;
 
 	@FindBy(xpath = ".//*[@class='grid']")
 	private WebElement dateTable;
 
-	@FindBy(xpath = ".//*[@name='time_dep']")
-	private WebElement time;
-
-	@FindBy(xpath = ".//*/table[@class='month']/caption[text()='July 2015']/../tbody/*/td[text()='19']")
+	@FindBy (name="date_dep")
 	private WebElement depDate;
 
-	@FindBy(xpath = ".//*/select[@name='time_dep']/option[@value='10:00']")
+	@FindBy (name="time_dep")
 	private WebElement depTime;
 
 	@FindBy(xpath = ".//*[@id='content']/form/p/button")
 	private WebElement searchButton;
 
-	@FindBy(xpath = "//*[@id='ts_res_tbl']")
+	@FindBy(xpath = "//table[@id='ts_res_tbl']/tbody")
 	private WebElement trainTable;
 
-	@FindBy(xpath = ".//*[@class='num']")  
+	@FindBy(xpath = ".//*[@class='num']/a")  
 	private WebElement train;
+	
+	@FindBy(xpath = "//div[@title]")
+    private WebElement town;
+	
+	@FindBy (id="stations_from")
+	private WebElement stationFrom;
+	
+	@FindBy (xpath =".//*[@id='stations_till']/div")
+	private WebElement stationTill;
 
 	@Step
 	public void stationFrom(String value) {
 		from.sendKeys(value);
-		WebDriverWait wait = new WebDriverWait(driver, 4);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Kyiv']")));
-		driver.findElement(By.xpath("//div[@title='Kyiv']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(town));
+		if (town.getText().contains(value)) town.click();
 	}
 
 	@Step
 	public void stationTill(String value) {
 		till.sendKeys(value);
-		WebDriverWait wait = new WebDriverWait(driver, 4);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='Odesa']")));
-		driver.findElement(By.xpath("//div[@title='Odesa']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(stationTill));
+		if (stationTill.getText().contains(value)) stationTill.click();
 	}
 
-	public void date() {
-		date.click();
+	public void setDate(String value) {
+		depDate.clear();
+		depDate.sendKeys(value);
 	}
 
-	public void time() {
-		time.click();
-	}
-
-	public void setDate() {
-		depDate.click();
-	}
-
-	public void setTime() {
-		depTime.click();
+	public void setTime(String value) {
+		depTime.sendKeys(value);
 	}
 
 	public void trainsSearch() {
 		searchButton.click();
 	}
+	
+	public boolean isTrainTableEnabled() {
+	     return trainTable.isEnabled();
+	}
 
-	public boolean trainsEnsure(String text) {
+	public boolean trainsEnsure(String trainNum) {
 
-		return train.getText().contains(text);
+        for (WebElement number : trainTable.findElements(By.xpath(".//*[@class='num']/a"))) {      	
+        	if (number.getText().equals(trainNum)) 
+        		{
+        		System.out.println(number.getText());
+        		return true;
+        		}
+        	}
+        return false;	
 	}
 
 }
